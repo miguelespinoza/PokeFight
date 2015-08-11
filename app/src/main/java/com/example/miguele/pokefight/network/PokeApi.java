@@ -15,6 +15,6 @@ public interface PokeApi {
     @GET("/pokemon/{id}")
     void getPokemon(@Path("id") String id, Callback<Pokemon> callback);
 
-    @GET("/move/{id")
+    @GET("/move/{id}")
     void getPokemonMove(@Path("id") String id, Callback<Move> callback);
 }

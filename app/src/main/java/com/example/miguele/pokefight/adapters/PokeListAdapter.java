@@ -25,7 +25,7 @@ import butterknife.ButterKnife;
  * Resources used:
  *  - RecyclerView: https://github.com/codepath/android_guides/wiki/Using-the-RecyclerView
  */
-public class PokeListAdapter extends RecyclerView.Adapter<PokeListAdapter.PokeViewHolder> {
+public class PokeListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final String TAG = "adapter_poke_list";
 
@@ -46,26 +46,40 @@ public class PokeListAdapter extends RecyclerView.Adapter<PokeListAdapter.PokeVi
     }
 
     @Override
-    public PokeViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = this.mLayoutInflater.inflate(R.layout.item_poke, parent, false);
-        PokeViewHolder pokeViewHolder = new PokeViewHolder(mContext, view);
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        return pokeViewHolder;
+        View view;
+        if (viewType == EMPTY_VIEW) {
+            view = this.mLayoutInflater.inflate(R.layout.empty_challenger, parent, false);
+            EmptyViewHolder evh = new EmptyViewHolder(view);
+            return evh;
+
+        } else {
+            view = this.mLayoutInflater.inflate(R.layout.item_poke, parent, false);
+            PokeViewHolder pokeViewHolder = new PokeViewHolder(mContext, view);
+
+            return pokeViewHolder;
+        }
     }
 
     @Override
-    public void onBindViewHolder(PokeViewHolder holder, int position) {
-        Log.i(TAG, "bindView on position(" + String.valueOf(position) + ")");
-        final Pokemon pokemon = this.mPokemonList.get(position);
-        String counter = "10";
-        if (position + 1 < 10) {
-            counter = "0" + String.valueOf(position + 1);
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+
+        if (holder instanceof PokeViewHolder) {
+
+            PokeViewHolder pokeViewHolder = (PokeViewHolder) holder;
+            Log.i(TAG, "bindView on position(" + String.valueOf(position) + ")");
+            final Pokemon pokemon = this.mPokemonList.get(position);
+            String counter = "10";
+            if (position + 1 < 10) {
+                counter = "0" + String.valueOf(position + 1);
+            }
+            pokeViewHolder.mCounter.setText(counter);
+            Uri uri = generatePokeMediaUri(pokemon.getPkdx_id());
+            Picasso.with(mContext).load(uri)
+                    .into(pokeViewHolder.mPokemonImg);
+            pokeViewHolder.mPokemonName.setText(pokemon.getName());
         }
-        holder.mCounter.setText(counter);
-        Uri uri = generatePokeMediaUri(pokemon.getPkdx_id());
-        Picasso.with(mContext).load(uri)
-                .into(holder.mPokemonImg);
-        holder.mPokemonName.setText(pokemon.getName());
     }
 
     private Uri generatePokeMediaUri(int pokeDexId) {
@@ -82,6 +96,12 @@ public class PokeListAdapter extends RecyclerView.Adapter<PokeListAdapter.PokeVi
         this.validatePokeList(pokeList);
         this.mPokemonList = (List<Pokemon>) pokeList;
         this.notifyDataSetChanged();
+    }
+
+    public class EmptyViewHolder extends RecyclerView.ViewHolder {
+        public EmptyViewHolder(View itemView) {
+            super(itemView);
+        }
     }
 
     public static class PokeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -112,5 +132,7 @@ public class PokeListAdapter extends RecyclerView.Adapter<PokeListAdapter.PokeVi
             }
         }
     }
+
+    private static final int EMPTY_VIEW = 10;
 
 }

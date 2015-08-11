@@ -192,6 +192,8 @@ public class PokeListActivity extends ActionBarActivity {
      * TODO: clean up callback hell!
      */
     public void generateMoves() {
+        Log.i(TAG, "func(generateMoves)");
+
         // generate 4 random nums for poke move ids
         ArrayList<Integer> randMovePos = new ArrayList<Integer>();
         int max = this.selectedPoke.getMoves().size();
@@ -200,11 +202,18 @@ public class PokeListActivity extends ActionBarActivity {
         do {
             Random random = new Random();
             randomNum = random.nextInt((max - min) + 1) + min;
+            boolean isRepeat = false;
             for (int movePos : randMovePos) {
                 if (movePos == randomNum) {
-                    continue;
+                    isRepeat = true;
+                    break;
                 }
             }
+            Log.i(TAG, "size" + String.valueOf(randMovePos.size()));
+            if (isRepeat) {
+                continue;
+            }
+            randMovePos.add(randomNum);
 
         } while (randMovePos.size() != 4);
 
@@ -212,9 +221,16 @@ public class PokeListActivity extends ActionBarActivity {
         // now call the API to get the move info based on resource_uri
         for (int movePos : randMovePos) {
             String resource_uri = this.selectedPoke.getMoves().get(movePos).getResource_uri();
-            PokeRestClient.get().getPokemonMove("331", new Callback<Move>() {
+            String moveNum = parseMove(resource_uri);
+            Log.i(TAG," getPokemonMove " + String.valueOf(moveNum));
+            PokeRestClient.get().getPokemonMove(moveNum, new Callback<Move>() {
                 @Override
                 public void success(Move move, Response response) {
+                    Log.i(TAG, "getPokemonMove success!");
+//                    Move rMove = new Move();
+//                    rMove.setName(move.getName());
+//                    rMove.setPower(move.getPower());
+//                    rMove.setPp(move.getPp());
                     moves.add(move);
 
                     if (moves.size() == 4) {
@@ -231,6 +247,12 @@ public class PokeListActivity extends ActionBarActivity {
                 }
             });
         }
+
+    }
+
+    private String parseMove(String resource_uri) {
+        String[] moveParts = resource_uri.split("/");
+        return moveParts[moveParts.length -1];
 
     }
 

@@ -18,6 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.PokeChallenger"
+            android:label="@string/title_activity_poke_challenger" >
+        </activity>
     </application>
 
 </manifest>
