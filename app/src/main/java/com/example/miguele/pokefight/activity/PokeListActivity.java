@@ -27,6 +27,7 @@ import java.util.Random;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.realm.RealmList;
 import retrofit.Callback;
 import retrofit.RetrofitError;
 import retrofit.client.Response;
@@ -236,11 +237,16 @@ public class PokeListActivity extends ActionBarActivity {
     private void saveFighter(ArrayList<Move> moves) {
         Log.i(TAG, "func(saveFighter)");
 
+        RealmList<Move> rMoves = new RealmList<Move>();
+        for (Move move : moves) {
+            rMoves.add(move);
+        }
+
         Pokemon savePoke = this.selectedPoke;
         savePoke.setMoves(null);
         PokeFighter pokeFighter = new PokeFighter();
-        pokeFighter.setPokemon(savePoke);
-        pokeFighter.setMoves(moves);
+//        pokeFighter.setPokemon(savePoke);
+        pokeFighter.setMoves(rMoves);
 
         PokeDB.addFighter(this, pokeFighter);
 

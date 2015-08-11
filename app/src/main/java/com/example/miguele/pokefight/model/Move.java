@@ -1,12 +1,17 @@
 package com.example.miguele.pokefight.model;
 
+import com.google.gson.annotations.SerializedName;
+
+import io.realm.RealmObject;
+
 /**
  * Created by miguele on 8/9/15.
  */
-public class Move {
-    private String name;
-    private int power;
-    private int pp;
+public class Move extends RealmObject {
+
+    @SerializedName("name") private String name;
+    @SerializedName("power") private int power;
+    @SerializedName("pp") private int pp;
 
     public String getName() {
         return name;
