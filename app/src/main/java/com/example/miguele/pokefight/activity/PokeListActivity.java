@@ -1,5 +1,6 @@
 package com.example.miguele.pokefight.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
@@ -238,6 +239,8 @@ public class PokeListActivity extends ActionBarActivity {
                         saveFighter(moves);
 
                         // Intent to PokeFight challenge
+                        Intent challengerIntent = new Intent(PokeListActivity.this, PokeChallenger.class);
+                        PokeListActivity.this.startActivity(challengerIntent);
                     }
                 }
 
@@ -253,7 +256,6 @@ public class PokeListActivity extends ActionBarActivity {
     private String parseMove(String resource_uri) {
         String[] moveParts = resource_uri.split("/");
         return moveParts[moveParts.length -1];
-
     }
 
     private void saveFighter(ArrayList<Move> moves) {
@@ -267,13 +269,12 @@ public class PokeListActivity extends ActionBarActivity {
         Pokemon savePoke = this.selectedPoke;
         savePoke.setMoves(null);
         PokeFighter pokeFighter = new PokeFighter();
-//        pokeFighter.setPokemon(savePoke);
+
         pokeFighter.setMoves(rMoves);
 
         PokeDB.addFighter(this, pokeFighter);
-
     }
 
-
     // Change FAB (Pause -> Proceed)
+
 }

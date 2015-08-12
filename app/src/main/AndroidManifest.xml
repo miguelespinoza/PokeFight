@@ -22,6 +22,10 @@
             android:name=".activity.PokeChallenger"
             android:label="@string/title_activity_poke_challenger" >
         </activity>
+        <activity
+            android:name=".activity.PokeRegister"
+            android:label="@string/title_activity_poke_register" >
+        </activity>
     </application>
 
 </manifest>
