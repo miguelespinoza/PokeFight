@@ -1,44 +1,25 @@
 package com.example.miguele.pokefight.activity;
 
-import android.support.annotation.Nullable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 
 import com.example.miguele.pokefight.R;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import jonathanfinerty.once.Once;
 
 public class PokeChallenger extends ActionBarActivity {
 
-    // register challenge views
-    @Nullable
-    @Bind(R.id.challenger_et) EditText mChallengerEditText;
-    @Nullable
-    @Bind(R.id.challenger_submit_btn) Button mChallengerSubmitBtn;
-
-    // poke challengers
-    @Nullable
     @Bind(R.id.challenger_list_rv) RecyclerView mChallengerRecyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);
-        Once.initialise(this);
-        String firstTimeRegister = "firstTime";
-        if (!Once.beenDone(Once.THIS_APP_INSTALL, firstTimeRegister)) {
-            setContentView(R.layout.activity_register_challenger);
-            Once.markDone(firstTimeRegister);
-        } else {
-            setContentView(R.layout.activity_poke_challenger);
-        }
+        ButterKnife.bind(this);setContentView(R.layout.activity_poke_challenger);
+
     }
 
     @Override

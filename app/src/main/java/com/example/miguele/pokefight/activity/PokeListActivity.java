@@ -239,7 +239,7 @@ public class PokeListActivity extends ActionBarActivity {
                         saveFighter(moves);
 
                         // Intent to PokeFight challenge
-                        Intent challengerIntent = new Intent(PokeListActivity.this, PokeChallenger.class);
+                        Intent challengerIntent = new Intent(PokeListActivity.this, PokeRegister.class);
                         PokeListActivity.this.startActivity(challengerIntent);
                     }
                 }
