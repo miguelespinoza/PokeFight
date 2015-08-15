@@ -1,31 +1,24 @@
 package com.example.miguele.pokefight.activity;
 
-import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.RecyclerView;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.miguele.pokefight.R;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
-public class PokeChallenger extends ActionBarActivity {
-
-    @Bind(R.id.challenger_list_rv) RecyclerView mChallengerRecyclerView;
+public class BattleActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ButterKnife.bind(this);setContentView(R.layout.activity_poke_challenger);
-
+        setContentView(R.layout.activity_battle);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_poke_challenger, menu);
+        getMenuInflater().inflate(R.menu.menu_battle, menu);
         return true;
     }
 

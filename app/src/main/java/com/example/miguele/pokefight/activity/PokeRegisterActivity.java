@@ -22,7 +22,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import jonathanfinerty.once.Once;
 
-public class PokeRegister extends ActionBarActivity {
+public class PokeRegisterActivity extends ActionBarActivity {
 
     private static final String TAG = "activity_poke_register";
 
@@ -51,6 +51,8 @@ public class PokeRegister extends ActionBarActivity {
 
         } else {
             // Go to Choose challenger
+            Intent challengerIntent = new Intent(PokeRegisterActivity.this, PokeChallengerActivity.class);
+            PokeRegisterActivity.this.startActivity(challengerIntent);
         }
 
     }
@@ -116,8 +118,8 @@ public class PokeRegister extends ActionBarActivity {
         SyncInfo.setYourInfo(this, name, userID);
 
         // Intent to PokeFight select challenger
-        Intent challengerIntent = new Intent(PokeRegister.this, PokeChallenger.class);
-        PokeRegister.this.startActivity(challengerIntent);
+        Intent challengerIntent = new Intent(PokeRegisterActivity.this, PokeChallengerActivity.class);
+        PokeRegisterActivity.this.startActivity(challengerIntent);
 
         // Testing to see what we get for reading child
 //        challengerFirebase.child("message").addValueEventListener(new ValueEventListener() {

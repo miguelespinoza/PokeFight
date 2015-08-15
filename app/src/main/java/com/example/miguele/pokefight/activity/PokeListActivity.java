@@ -20,6 +20,7 @@ import com.example.miguele.pokefight.model.PokeFighter;
 import com.example.miguele.pokefight.model.Pokemon;
 import com.example.miguele.pokefight.network.PokeRestClient;
 import com.example.miguele.pokefight.storage.PokeDB;
+import com.example.miguele.pokefight.utils.Spitter;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
@@ -123,7 +124,7 @@ public class PokeListActivity extends ActionBarActivity {
                 this.pokeAdapter.setPokemonList(pokeList);
             }
 
-            this.mPokeRecyclerView.setAdapter(pokeAdapter);
+            this.mPokeRecyclerView.setAdapter(this.pokeAdapter);
         }
     }
 
@@ -154,7 +155,8 @@ public class PokeListActivity extends ActionBarActivity {
 
                 @Override
                 public void failure(RetrofitError error) {
-                    Log.i(TAG, "function(createPokeList)\n" + error.toString());
+//                    Log.i(TAG, "function(createPokeList)\n" + error.toString());
+                    Spitter.Error(TAG, "createPokeList", error.toString());
                 }
             });
         }
@@ -239,7 +241,7 @@ public class PokeListActivity extends ActionBarActivity {
                         saveFighter(moves);
 
                         // Intent to PokeFight challenge
-                        Intent challengerIntent = new Intent(PokeListActivity.this, PokeRegister.class);
+                        Intent challengerIntent = new Intent(PokeListActivity.this, PokeRegisterActivity.class);
                         PokeListActivity.this.startActivity(challengerIntent);
                     }
                 }

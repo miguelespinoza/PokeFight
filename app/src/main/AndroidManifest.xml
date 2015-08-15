@@ -19,12 +19,16 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.PokeChallenger"
+            android:name=".activity.PokeChallengerActivity"
             android:label="@string/title_activity_poke_challenger" >
         </activity>
         <activity
-            android:name=".activity.PokeRegister"
+            android:name=".activity.PokeRegisterActivity"
             android:label="@string/title_activity_poke_register" >
+        </activity>
+        <activity
+            android:name=".activity.BattleActivity"
+            android:label="@string/title_activity_battle" >
         </activity>
     </application>
 
